@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Churn Prediction</title>
+    <!-- Optional: Add your CSS link here -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Customer Churn Prediction</h2>
+        <form method="POST" action="/predict">
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+
+            <label for="SeniorCitizen">Senior Citizen:</label>
+            <select id="SeniorCitizen" name="SeniorCitizen">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <label for="Partner">Partner:</label>
+            <select id="Partner" name="Partner">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+
+            <label for="Dependents">Dependents:</label>
+            <select id="Dependents" name="Dependents">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+
+            <label for="tenure">Tenure (in months):</label>
+            <input type="number" id="tenure" name="tenure" required>
+
+            <label for="PhoneService">Phone Service:</label>
+            <select id="PhoneService" name="PhoneService">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+
+            <label for="MultipleLines">Multiple Lines:</label>
+            <select id="MultipleLines" name="MultipleLines">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+
+            <!-- Add other form fields similarly -->
+
+            <label for="TotalCharges">Total Charges:</label>
+            <input type="number" id="TotalCharges" name="TotalCharges" required>
+
+            <input type="submit" value="Predict Churn">
+        </form>
+
+        {% if prediction_result is not none %}
+            <h3>Prediction Result: 
+                {% if prediction_result == 1 %}
+                    Customer will churn.
+                {% else %}
+                    Customer will not churn.
+                {% endif %}
+            </h3>
+        {% endif %}
+    </div>
+</body>
+</html>
