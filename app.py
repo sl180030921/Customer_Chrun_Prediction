@@ -1,8 +1,10 @@
+from flask import Flask, render_template, request
 import pickle
-from flask import Flask, render_template, request, jsonify
 import numpy as np
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='/workspaces/Customer_Chrun_Prediction/template')
+
+
 
 # Load the trained RandomForest model
 with open('random_forest_model.pkl', 'rb') as file:
@@ -41,9 +43,6 @@ def predict():
         data['MonthlyCharges'], 
         data['TotalCharges']
     ]])
-
-    # Preprocess categorical features (e.g., one-hot encoding, label encoding) if needed
-    # Ensure that the model can accept this form of data
 
     # Make prediction using the RandomForest model
     prediction = rf_model.predict(customer_data)
